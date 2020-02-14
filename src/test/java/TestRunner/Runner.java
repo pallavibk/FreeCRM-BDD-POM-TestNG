@@ -1,10 +1,14 @@
 package TestRunner;
 
 
+import org.junit.runner.RunWith;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;
+import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.CucumberFeatureWrapper;
@@ -12,16 +16,38 @@ import cucumber.api.testng.TestNGCucumberRunner;
 
 
 
+@RunWith(ExtendedCucumber.class)
+@ExtendedCucumberOptions(//jsonReport="target/cucumber.json",
+retryCount=3
+//,detailedReport=true,
+//detailedAggregatedReport=true,
+//overviewReport=true,
+//coverageReport=true,
+//jsonUsageReport="target/cucumber-usage.json",
+//usageReport=true
+//,toPDF=true,
+//excludeCoverageTags={""},
+//includeCoverageTags= {"@chrome"},
+//outputFolder="target"
+)
+
+
+
 @CucumberOptions(
         features = "src/test/resources/features/login.feature",
-        glue = {"stepDefinitions"},
+        glue = {"stepDefinitions"},monochrome=true,
         
         format = {
                 "pretty",
                 "html:target/cucumber-reports/cucumber-pretty",
-                "json:target/cucumber-reports/CucumberTestReport.json",
-                "rerun:target/cucumber-reports/rerun.txt"
-        },plugin = "json:target/cucumber-reports/CucumberTestReport.json")
+               // "json:target/cucumber-reports/CucumberTestReport.json",
+                //"rerun:target/cucumber-reports/rerun.txt"
+        },
+        plugin= {//"pretty:STDOUT",
+        		//"json:target/cucumber.json",
+        		//"usage:target/cucumber-usage.json",
+        		//"junit:target/cucumber-results.xml",
+        		"rerun:target/rerun.txt"})
 
 public class Runner {
     private TestNGCucumberRunner testNGCucumberRunner;

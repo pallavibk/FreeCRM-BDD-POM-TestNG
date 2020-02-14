@@ -13,6 +13,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Parameters;
 
 import com.qa.util.TestUtil;
 
@@ -37,10 +38,11 @@ public class Base {
 			e.printStackTrace();
 		}
 	}
-
-	public static void initialization()
+@Parameters("browser")
+	public static void initialization(String BrowserName)
 	{
- String BrowserName=prop.getProperty("browser");
+// String BrowserName=prop.getProperty("browser");
+
 	
 		if(BrowserName.equalsIgnoreCase("chrome"))
 		{
@@ -50,8 +52,8 @@ public class Base {
 		else if(BrowserName.equalsIgnoreCase("firefox"))
 		{
 			System.setProperty("webdriver.firefox.marionette",
-					"C:\\Programs\\GekoDriver\\geckodriver-v0.24.0-win64\\GekoDriver.exe");
-			 driver = new FirefoxDriver();
+					"C:\\Selenium\\All_Downloads_For_Selenium\\GekoDriver\\GekoDriver.exe");
+					driver = new FirefoxDriver();
 		}
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -59,11 +61,8 @@ public class Base {
 		driver.manage().timeouts().pageLoadTimeout(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 		driver.get(prop.getProperty("url"));
 	}
-	public void failed(String testMethodName) throws IOException
-	  {
-	File ScrFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
-		FileUtils.copyFile(ScrFile,new File("C:\\Selenium\\Workspace\\FreeCRM-BDD-POM-TestNG\\Scrrenshots\\"
-	+testMethodName+"-"+".jpg"));
+	
 }
-}
+	
+	
+	

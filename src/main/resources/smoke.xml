@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name=" Free CRM-Smoke" parallel="none">
-<listeners>
-		<listener class-name="com.crm.extentReport.ExtentReporterNG" />
-	</listeners>
-	<test name="Free CRM App Test Cases">
+<!-- <listeners>
+		<listener class-name="com.qa.extentReport.ExtentReporterNG" />
+			</listeners> -->
+			
+	<test name="Free CRM App Test Case 1">
+	    <parameter name="broser" value="chrome" />
 		<classes>
 		<!-- <class name="com.crm.testcases.LoginPageTest"> </class>
         <class name="com.crm.testcases.HomePageTest"> </class>	 -->
-		<class name="com.crm.testcases.ContactsPageTest"></class>	 
+		<class name="TestRunner.Runner"></class>	 
    </classes>
 	</test>
+	<!-- <test name="Free CRM App Test Case 2">
+	    <parameter name="broser" value="firefox" />
+		<classes>
+		<class name="com.crm.testcases.LoginPageTest"> </class>
+        <class name="com.crm.testcases.HomePageTest"> </class>	
+		<class name="TestRunner.Runner"></class>	 
+   </classes>
+	</test> -->
 </suite>
